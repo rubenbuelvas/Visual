@@ -1,24 +1,33 @@
 static final int MSIZE = 3;
 static final float[][] convMatrix = { { -1, -1, -1 }, 
-                                      { -1,  9, -1 }, 
+                                      { -1,  8, -1 }, 
                                       { -1, -1, -1 } };
+                                      
+/*static final float[][] convMatrix = { {  1,  0, -1 }, 
+                                      {  0,  0,  0 }, 
+                                      { -1,  0,  1 } };*/
 
-PImage img, grayImg, lumaImg, convImg;
+/*static final float[][] convMatrix = { {  0,  0,  0 }, 
+                                      {  0,  1,  0 }, 
+                                      {  0,  0,  0 } };*/
+
+PImage mainImg, grayImg, lumaImg, convImg;
 int[] grayHistogram, lumaHistogram;
 
 void setup() {
   grayHistogram = new int[256];
   lumaHistogram = new int[256];
   size(980, 640);
-  img = loadImage("cheesecake.jpg");
+  mainImg = loadImage("cheesecake.jpg");
   grayImg = grayAvg("cheesecake.jpg");
+  lumaImg = luma("cheesecake.jpg");
   convImg = convolution("cheesecake.jpg");
 }
 
 void draw() {
-  image(img, 20, 20, 300, 300);  
+  image(mainImg, 20, 20, 300, 300);  
   image(grayImg, 340, 20, 300, 300);
-  image(lumaImg, 660, 20, 300, 300);
+  image(convImg, 660, 20, 300, 300);
   displayHistogram(grayHistogram, 100, 600, color(100));
   displayHistogram(lumaHistogram, 100, 600, color(150));
 }
@@ -67,11 +76,11 @@ PImage convolution(String imgName) {
   PImage pimg = loadImage(imgName);
   pimg.loadPixels();
   // Begin our loop for every pixel in the smaller image
-  for (int x = 0; x < pimg.width; x++) {
-    for (int y = 0; y < pimg.height; y++ ) {
-      color c = conv(x, y, convMatrix, MSIZE, img);
-      int loc = x + y*img.width;
-      pixels[loc] = c;
+  for (int x = 1; x < pimg.width-1; x++) {
+    for (int y = 1; y < pimg.height-1; y++ ) {
+      color c = conv(x, y, convMatrix, MSIZE, pimg);
+      int loc = x + y*pimg.width;
+      pimg.pixels[loc] = c;
     }
   }
   pimg.updatePixels();
