@@ -1,9 +1,11 @@
 import processing.video.*;
 Movie myMovie;
-int myFrameCount;
+int c;
+String fps;
 
 void setup() {
-  myFrameCount = 0;
+  c = 0;
+  fps = "0";
   size(640, 400);
   background(0);
   myMovie = new Movie(this, "lucas.mp4");
@@ -13,10 +15,13 @@ void setup() {
 void draw() {
   background(0);
   image(myMovie, 0, 0);
-  text(frameRate, 30, 380);
+  c++;
+  text(fps, 30, 380);
+  if(c % 10 == 0){
+    fps = "FPS: " + int(frameRate);
+  }
 }
 
-// Called every time a new frame is available to read
 void movieEvent(Movie m) {
   m.read();
 }
