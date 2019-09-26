@@ -1,15 +1,4 @@
-static final int MSIZE = 3;
-static final float[][] convMatrix = { { -1, -1, -1 }, 
-                                      { -1,  8, -1 }, 
-                                      { -1, -1, -1 } };
-                                      
-/*static final float[][] convMatrix = { {  1,  0, -1 }, 
-                                      {  0,  0,  0 }, 
-                                      { -1,  0,  1 } };*/
-
-/*static final float[][] convMatrix = { {  0,  0,  0 }, 
-                                      {  0,  1,  0 }, 
-                                      {  0,  0,  0 } };*/
+static final int CM_SIZE = 3;
 
 PImage mainImg, grayImg, lumaImg, convImg;
 int[] grayHistogram, lumaHistogram;
@@ -21,7 +10,8 @@ void setup() {
   mainImg = loadImage("cheesecake.jpg");
   grayImg = grayAvg("cheesecake.jpg");
   lumaImg = luma("cheesecake.jpg");
-  convImg = convolution("cheesecake.jpg");
+  
+  Convolution c = new Convolution("cheesecake.jpg");
 }
 
 void draw() {
@@ -69,48 +59,4 @@ PImage luma(String imgName) {
   }
   pimg.updatePixels();  
   return pimg;
-}
-
-
-PImage convolution(String imgName) {
-  PImage pimg = loadImage(imgName);
-  pimg.loadPixels();
-  // Begin our loop for every pixel in the smaller image
-  for (int x = 1; x < pimg.width-1; x++) {
-    for (int y = 1; y < pimg.height-1; y++ ) {
-      color c = conv(x, y, convMatrix, MSIZE, pimg);
-      int loc = x + y*pimg.width;
-      pimg.pixels[loc] = c;
-    }
-  }
-  pimg.updatePixels();
-  return pimg;
-}
-
-color conv(int x, int y, float[][] matrix, int matrixsize, PImage img)
-{
-  float rtotal = 0.0;
-  float gtotal = 0.0;
-  float btotal = 0.0;
-  int offset = matrixsize / 2;
-  for (int i = 0; i < matrixsize; i++){
-    for (int j= 0; j < matrixsize; j++){
-      // What pixel are we testing
-      int xloc = x+i-offset;
-      int yloc = y+j-offset;
-      int loc = xloc + img.width*yloc;
-      // Make sure we haven't walked off our image, we could do better here
-      loc = constrain(loc,0,img.pixels.length-1);
-      // Calculate the convolution
-      rtotal += (red(img.pixels[loc]) * matrix[i][j]);
-      gtotal += (green(img.pixels[loc]) * matrix[i][j]);
-      btotal += (blue(img.pixels[loc]) * matrix[i][j]);
-    }
-  }
-  // Make sure RGB is within range
-  rtotal = constrain(rtotal, 0, 255);
-  gtotal = constrain(gtotal, 0, 255);
-  btotal = constrain(btotal, 0, 255);
-  // Return the resulting color
-  return color(rtotal, gtotal, btotal);
 }
