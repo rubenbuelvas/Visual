@@ -7,15 +7,17 @@ int min, max;
 int pad = 40;
 int osx = 320, osy = 320;
 int csx = 320, csy = 320;
-int hox = osx+csx/2+280, hoy = 500;
+
+// 
+int ohx = osx+csx/2+280, hoy = 500, fhx = ohx+3*255;
 
 void setup() {
   size(1550, 600);
   textAlign(CENTER, CENTER);
 
   handles = new Handle[2];
-  handles[0] = new Handle(hox, hoy, hox, hox+3*255);
-  handles[1] = new Handle(hox+3*255, hoy, hox, hox+3*255);
+  handles[0] = new Handle(ohx, hoy, ohx, fhx);
+  handles[1] = new Handle(fhx, hoy, ohx, fhx);
   
   mainImg = loadImage("cheesecake.jpg");
   canvas = new Canvas("cheesecake.jpg");
@@ -35,13 +37,17 @@ void draw() {
   image(mainImg, pad, 180, osx, osy);
   textSize(20);
   text("Original image", pad+osx/2, 520);
-  
-  //canvas.convolute(ConvModes.SHARPEN);
-  canvas.display(osx+60, 180, csx, csy);
   textSize(20);
   text("Edited image", osx+60+csx/2, 520);
   
-  histogram.displayGray(hox, 500, handles[0].dx, handles[1].dx);
+  //canvas.convolute(ConvModes.SHARPEN);
+  
+  canvas.display(osx+60, 180, csx, csy);
+  canvas.segment(
+    map(handles[0].dx, ohx, fhx, 0, 255),
+    map(handles[1].dx, ohx, fhx, 0, 255)
+  );
+  histogram.displayGray(ohx, 500, handles[0].dx, handles[1].dx);
   
   for(int i = 0; i < 2; i++) {
     handles[i].update();

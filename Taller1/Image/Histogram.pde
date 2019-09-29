@@ -1,5 +1,6 @@
 class Histogram {
   int skip = 3;
+  color ignored = color(50);
   PImage img;
   int[] data;
   int[][] colorData;
@@ -42,16 +43,20 @@ class Histogram {
   
   void display(int ox, int oy, color c, int idx, int min, int max) {
     pushStyle();
-    stroke(color(100));
+    stroke(ignored);
     int ini = ox;
     for (int i = 0; i < 256; i++) {
       if(ini > min)  stroke(color(c));
-      else if(ini > max) stroke(color(100));
+      if(ini > max) stroke(ignored);
       line(ini, oy, ini, (oy-(idx == -1 ? data[i] : colorData[idx][i])/scale));
       ini += skip;
     }
-    popStyle();;
+    popStyle();
   }
+   
+  void displayGray(int ox, int oy, int min, int max) {
+    this.display(ox, oy, color(255), -1, min, max);  
+  }   
    
   void displayColor(int ox, int oy, int min, int max) {
     this.display(ox, oy, color(255, 0, 0),  0, min, max);
