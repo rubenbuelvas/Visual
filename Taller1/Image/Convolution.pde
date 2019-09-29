@@ -1,6 +1,6 @@
 
 static class ConvMask {
-  static final int EDGE_DETECT_SIZE = 3;
+  static final int CM_SIZE = 3;
   static final float[][] EDGE_DETECT1 = { { -1, -1, -1 }, 
                                           { -1,  8, -1 }, 
                                           { -1, -1, -1 } };
@@ -9,9 +9,28 @@ static class ConvMask {
                                           {  0,  0,  0 }, 
                                           { -1,  0,  1 } };
 
-  static final float[][] EDGE_DETECT3 = { {  0,  0,  0 }, 
-                                          {  0,  1,  0 }, 
-                                          {  0,  0,  0 } };
+  static final float[][] IDENTITY = { {  0,  0,  0 }, 
+                                      {  0,  1,  0 }, 
+                                      {  0,  0,  0 } };
+                                      
+  static float[][] mask(int id) {
+     switch(id) {
+       case 0:
+       return ConvMask.EDGE_DETECT1;
+       case 1:
+       return ConvMask.EDGE_DETECT2;
+       default:
+       return ConvMask.IDENTITY;
+     }
+  }
+  
+  static int size(int id) {
+    switch(id) {
+      // TODO:
+      default:
+      return 3;
+    }
+  }
 }
 
 class Convolution {
@@ -24,19 +43,18 @@ class Convolution {
   }
   
 
-PImage apply(float[][] matrix, int matrixsize) {
-  img.loadPixels();
+/*PGraphics apply(float[][] matrix, int matrixsize) {
+  loadPixels();
   // Begin our loop for every pixel in the smaller image
   for (int x = 0; x < img.width; x++) {
     for (int y = 0; y < img.height; y++ ) {
       color c = conv(x, y, matrix, matrixsize, img);
       int loc = x + y*img.width;
-      img.pixels[loc] = c;
+      pixels[loc] = c;
     }
   }
-  img.updatePixels();
-  return img;
-}
+  updatePixels();
+}*/
 
 color conv(int x, int y, float[][] matrix, int matrixsize, PImage img)
 {
@@ -66,18 +84,4 @@ color conv(int x, int y, float[][] matrix, int matrixsize, PImage img)
   return color(rtotal, gtotal, btotal);
 }
 
-PImage altconvolution(String imgName) {
-  PImage img = loadImage(imgName);
-  for(int x = 0; x < img.width; x++) {
-    for(int y = 0; y < img.height; y++) {
-        float acc = 0;
-        for(int i = 0; i < CM_SIZE; i++) {
-          for(int j = 0; j < CM_SIZE; j++) {
-              
-          }
-        }
-    }
-  }
-  return img;
-}
 }
