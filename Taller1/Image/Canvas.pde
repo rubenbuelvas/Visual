@@ -1,30 +1,20 @@
-static class CanvasModes {
-  static final int GAVG = 0;
-  static final int LUMA = 1;
-}
-
-static class ConvModes {
-  static final int EDGE_DETECT1 = 0;
-  static final int EDGE_DETECT2 = 1;
-}
-
 class Canvas {
     PGraphics pg;
     PImage original, img;
     String imgName;
     int sizeX, sizeY;
 
-    Canvas(String imgName, int sizeX, int sizeY) {
+    Canvas(String imgName) {
         this.imgName = imgName;
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
         this.img = this.original = loadImage(imgName);
-        this.pg = createGraphics(img.width, img.height);
+        this.sizeX = img.width;
+        this.sizeY = img.height;
+        this.pg = createGraphics(sizeX, sizeY);
         this.loadImg();
     }
    
-    void display(int x, int y) {
-        image(pg, x, y, sizeX, sizeY);
+    void display(int x, int y, int sx, int sy) {
+        image(pg, x, y, sx, sy);
     }
 
     void loadImg() {
