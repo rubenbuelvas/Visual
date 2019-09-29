@@ -1,7 +1,8 @@
 Canvas canvas;
-PImage mainImg, grayImg, lumaImg, convImg;
+PImage mainImg;
 Histogram histogram;
 Handle[] handles;
+int min, max;
 
 int pad = 40;
 int osx = 320, osy = 320;
@@ -13,12 +14,12 @@ void setup() {
   textAlign(CENTER, CENTER);
 
   handles = new Handle[2];
-  handles[0] = new Handle(hox, hoy);
-  handles[1] = new Handle(hox+3*255, hoy);
+  handles[0] = new Handle(hox, hoy, hox, hox+3*255);
+  handles[1] = new Handle(hox+3*255, hoy, hox, hox+3*255);
   
   mainImg = loadImage("cheesecake.jpg");
   canvas = new Canvas("cheesecake.jpg");
-  histogram = new Histogram(canvas.img);
+  histogram = new Histogram(canvas.img, 50);
   //canvas.convolute(ConvModes.EDGE_DETECT1);
   canvas.apply(CanvasModes.LUMA);
   histogram.loadGray();
@@ -40,10 +41,14 @@ void draw() {
   textSize(20);
   text("Edited image", osx+60+csx/2, 520);
   
-  histogram.displayGray(hox, 500, 45);
+  histogram.displayGray(hox, 500, handles[0].dx, handles[1].dx);
   
   for(int i = 0; i < 2; i++) {
     handles[i].update();
     handles[i].display();
   }
+}
+
+void mouseReleased() {
+  for(int i = 0; i < 2; i++)  handles[i].release();  
 }

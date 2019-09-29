@@ -4,8 +4,10 @@ class Histogram {
   int[] data;
   int[][] colorData;
   int dx1, dy1, dx2, dy2;
+  int scale;
   
-  Histogram(PImage img) {
+  Histogram(PImage img, int scale) {
+    this.scale = scale;
     this.img = img;
     this.data = new int[256];
     this.colorData = new int[3][256];
@@ -38,23 +40,22 @@ class Histogram {
     }  
   }
   
-  void display(int ox, int oy, color c, int scale, int idx) {
+  void display(int ox, int oy, color c, int idx, int min, int max) {
     pushStyle();
-    stroke(c);
+    stroke(color(100));
     int ini = ox;
     for (int i = 0; i < 256; i++) {
+      if(ini > min)  stroke(color(c));
+      else if(ini > max) stroke(color(100));
       line(ini, oy, ini, (oy-(idx == -1 ? data[i] : colorData[idx][i])/scale));
       ini += skip;
     }
-    popStyle();
+    popStyle();;
   }
-  void displayGray(int ox, int oy, int scale) {
-    this.display(ox, oy, color(255), scale, -1);  
-  }  
-  
-  void displayColor(int ox, int oy, int scale) {
-    this.display(ox, oy, color(255, 0, 0), scale, 0);
-    this.display(ox+1, oy, color(0, 255, 0), scale, 1);
-    this.display(ox+2, oy, color(0, 0, 255), scale, 2);
+   
+  void displayColor(int ox, int oy, int min, int max) {
+    this.display(ox, oy, color(255, 0, 0),  0, min, max);
+    this.display(ox+1, oy, color(0, 255, 0), 1, min, max);
+    this.display(ox+2, oy, color(0, 0, 255), 2, min, max);
   }
 }

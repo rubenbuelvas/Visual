@@ -1,16 +1,21 @@
 class Handle {
   int m = 10;
   int size = 15;
-  int x, y, dx;
+  int x, y, dx, max, min;
+  boolean locked;
   
-  Handle(int ox, int oy) {
+  Handle(int ox, int oy, int min, int max) {
     x = dx = ox;
     y = oy + m;
+    this.max = max;
+    this.min = min;
   }
   
   void update() {
-    if(onPressed()) {
-      dx = mouseX;
+    if(locked) {
+      if(mouseX < min)  dx = min;
+      //else if(mouseX > max)  dx = max;
+      else dx = mouseX;
     }
   }
   
@@ -26,7 +31,12 @@ class Handle {
   }
   
   boolean onPressed() {
-    return onHover() && mousePressed;  
+    locked = locked || onHover() && mousePressed;
+    return locked;  
+  }
+  
+  void release() {
+    locked = false;  
   }
   
   boolean onHover() {
