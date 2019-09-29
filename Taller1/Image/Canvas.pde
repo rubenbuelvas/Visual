@@ -41,6 +41,9 @@ class Canvas {
       }
     }
     
+    /*
+     * Modified from Daniel Shiffman's code in https://processing.org/examples/convolution.html
+     */
     void convolute(int maskId) {
       this.reset();
       pg.loadPixels();
@@ -55,6 +58,9 @@ class Canvas {
       pg.updatePixels();
     }
     
+    /*
+     * Modified from Daniel Shiffman's code in https://processing.org/examples/convolution.html
+     */
     color conv(int x, int y, float[][] matrix, int matrixsize, PImage img)
     {
       float rtotal = 0.0;
