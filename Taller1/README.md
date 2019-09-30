@@ -1,4 +1,10 @@
-# Discusión del taller
+# Computación visual - Taller 1
+| Integrante  | github nick |
+|-------------|-------------|
+|Rubén Buelvas|rubenbuelvas |
+|José Nieto   |jdnietov     |
+
+# Discusión
 
 ## Imagen
 
@@ -60,3 +66,18 @@ Existen dos clases de histogramas disponibles en el aplicativo: primero, un hist
 
 ### Segmentación de la imagen
 A través de un par de niveladores, puede seleccionarse un rango de brillo o de colores que mostrar dentro de la aplicación, de tal forma que pueda ilustrarse gráficamente qué porciones de la aplicación corresponden a qué rangos del histograma.
+
+
+## Video
+
+El procesamiento de video se hizo por medio de la aplicación del filtro LUMA y de máscaras de convolución.
+
+El video original se reproduce en la parte superior izquierda de la pantalla, las modificaciones se cargan en instancias de `PGraphics` y se despliegan en la parte derecha de la pantalla.
+
+```
+image(movie, 0, 0);
+image(luma(movie), 640, 0); 
+image(convolute(movie, 2), 640, 360); 
+```
+
+Se utilizan funciones sacadas del canvas del programa que manipula las imágenes. Éstas funciones reciben el objeto `Movie`, cuyo comportamiento, en este contexto, es el mismo del de un objeto `PImage`. Los cambios realizados sobre la imagen se guardan en un objeto `PGraphics`, que es lo que retorna la función.
