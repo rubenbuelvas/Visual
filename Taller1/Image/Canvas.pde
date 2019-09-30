@@ -61,7 +61,7 @@ class Canvas {
         for (int y = 0; y < img.height; y++ ) {
           int loc = x + y*img.width;
           color p = img.pixels[loc];
-          img.pixels[loc] = color(0.2627*(red(p)) + 0.6780*green(p) + 0.0593*blue(p));
+          img.pixels[loc] = color(0.212*(red(p)) + 0.701*green(p) + 0.087*blue(p));
         }
       }
       
