@@ -6,7 +6,8 @@ class Canvas {
 
     Canvas(String imgName) {
         this.imgName = imgName;
-        this.img = this.original = loadImage(imgName);
+        this.img = loadImage(imgName);
+        this.original = loadImage(imgName);
         this.sizeX = img.width;
         this.sizeY = img.height;
         this.pg = createGraphics(sizeX, sizeY);
@@ -27,7 +28,7 @@ class Canvas {
       this.img = this.original;  
     }
     
-    void apply(int mode) {
+    void filt(int mode) {
       this.reset();
       switch(mode) {
         case CanvasModes.GAVG:
@@ -42,43 +43,35 @@ class Canvas {
     }
     
     void grayAvg() {
-      img.loadPixels();
+      pg.loadPixels();
       for (int i = 0; i < img.height; i++) {
         for (int j = 0; j < img.width; j++) {
           int idx = i*img.width+j%img.height;
           color p = img.pixels[idx];
           //grayHistogram[int((red(p) + blue(p) + green(p)) / 3)] += 1;
-          img.pixels[idx] = color((red(p) + blue(p) + green(p)) / 3);
+          pg.pixels[idx] = color((red(p) + blue(p) + green(p)) / 3);
         }
       }
-      img.updatePixels();
+      pg.updatePixels();
     }
     
     void luma() {
-      img.loadPixels();
+      pg.loadPixels();
       
       for (int x = 0; x < img.width; x++) {
         for (int y = 0; y < img.height; y++ ) {
           int loc = x + y*img.width;
           color p = img.pixels[loc];
-          img.pixels[loc] = color(0.212*(red(p)) + 0.701*green(p) + 0.087*blue(p));
+          pg.pixels[loc] = color(0.212*(red(p)) + 0.701*green(p) + 0.087*blue(p));
         }
       }
       
-      img.updatePixels();/*
-      for (int i = 0; i < img.height; i++) {
-        for (int j = 0; j < img.width; j++) {
-          color p = img.pixels[i*img.width+j%img.height];
-          img.pixels[i*img.width+j%img.height] = color(0.2627*(red(p)) + 0.6780*green(p) + 0.0593*blue(p));
-          //lumaHistogram[int(0.2627*(red(p)) + 0.6780*green(p) + 0.0593*blue(p))] += 1;
-        }
-      }
-      img.updatePixels();*/
+      pg.updatePixels();
     }
     
     void segment(float min, float max) {
       pg.loadPixels();
-      System.out.println(min);
+      //System.out.println(min);
       for (int i = 0; i < img.width; i++) {
         for (int j = 0; j < img.height; j++) {
           int loc = i + j*img.width;

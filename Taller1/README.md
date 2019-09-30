@@ -53,3 +53,10 @@ Las máscaras de convolución disponibles para prueba son las siguientes:
 - `SHARPEN` y `SHARPEN2` para afilar los contornos de la imagen y darles mayor profundidad.
 - `EDGE_DETECT1` y `EDGE_DETECT2` para resaltar los bordes de la imagen, opacando el resto de sus contenidos.
 - `BOX_BLUR` para un desenfoque suave.
+
+### Creación de histogramas
+
+Existen dos clases de histogramas disponibles en el aplicativo: primero, un histograma que muestra tres canales de colores (rojo, verde y azul), y segundo, un histograma de un único canal que muestre el brillo en el pixel.
+
+### Segmentación de la imagen
+A través de un par de niveladores, puede seleccionarse un rango de brillo o de colores que mostrar dentro de la aplicación, de tal forma que pueda ilustrarse gráficamente qué porciones de la aplicación corresponden a qué rangos del histograma.

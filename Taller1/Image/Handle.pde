@@ -20,9 +20,7 @@ class Handle {
   }
   
   void display() {
-
     pushStyle();
-    
     noStroke();
     if(onHover()) { fill(color(255, 0, 0)); }
     if(onPressed()) { fill(color(0, 255, 0)); }

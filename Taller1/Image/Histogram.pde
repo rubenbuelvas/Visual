@@ -15,7 +15,11 @@ class Histogram {
     dx1 = dx2 = dy1 = dy2 = -1;
   }
   
-  void loadGray() {
+  void loadGray(PImage img) {
+    for(int i = 0; i < 256; i++) {
+      data[i] = 0;  
+    }
+    
     for(int i = 0; i < img.width; i++) {
       for(int j = 0; j < img.height; j++) {
         int loc = i + j*img.width;
