@@ -1,27 +1,44 @@
 import processing.video.*;
-Movie myMovie;
+PGraphics pg0, pg1;
+PImage img;
+Movie movie; //640x360
 int c;
 String fps;
-
-void setup() {
+ 
+ 
+void setup() 
+{
+  size(1280, 720);
   c = 0;
-  fps = "0";
-  size(640, 400);
-  background(0);
-  myMovie = new Movie(this, "lucas.mp4");
-  myMovie.loop();
+  fps = "";
+  pg0 = createGraphics(640, 360);
+  pg1 = createGraphics(640, 360);
+  movie = new Movie(this, "lucas.mp4");
+  movie.loop();
+ 
 }
-
-void draw() {
+ 
+void movieEvent(Movie m) {
+  m.read();
+}
+ 
+void draw() 
+{
   background(0);
-  image(myMovie, 0, 0);
+  pg0.beginDraw();
+  //pg.image(img, 0, 0, width, height);
+  pg0.image(movie, 0, 0);
+  pg0.endDraw();
+  image(pg0, 0, 0); 
+  pg1.beginDraw();
+  //pg.image(img, 0, 0, width, height);
+  pg1.image(movie, 0, 0);
+  pg1.endDraw();
+  image(pg0, 640, 0); 
   c++;
+  textSize(26);
   text(fps, 30, 380);
   if(c % 10 == 0){
     fps = "FPS: " + int(frameRate);
   }
-}
-
-void movieEvent(Movie m) {
-  m.read();
 }
