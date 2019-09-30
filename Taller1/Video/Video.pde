@@ -1,5 +1,5 @@
 import processing.video.*;
-PGraphics pg;
+PGraphics pg0, pg1, pg2;
 PImage img;
 Movie movie; //640x360
 int c;
@@ -11,7 +11,6 @@ void setup()
   size(1280, 720);
   c = 0;
   fps = "";
-  pg = createGraphics(1280, 720);
   movie = new Movie(this, "lucas.mp4");
   movie.loop();
  
@@ -23,14 +22,10 @@ void movieEvent(Movie m) {
  
 void draw() 
 {
-  background(0);
-  pg.beginDraw();
-  //pg.image(img, 0, 0, width, height);
-  pg.image(movie, 0, 0);
-  pg.endDraw();
-  image(pg, 0, 0); 
-  //image(luma(pg), 640, 0); 
-  image(convolute(pg, 0), 640, 360); 
+  background(0);  
+  image(movie, 0, 0);
+  image(luma(movie), 640, 0); 
+  image(convolute(movie, 2), 640, 360); 
   
   c++;
   textSize(26);
@@ -42,18 +37,19 @@ void draw()
 
 
 
-PImage convolute(PImage original, int maskId) {
-      PImage img = original; 
-      PImage pg = original;
+PGraphics convolute(PImage img, int maskId) {
+      PGraphics pg = createGraphics(640, 360);
+      pg.beginDraw();
       pg.loadPixels();
       for (int x = 0; x < img.width; x++) {
         for (int y = 0; y < img.height; y++ ) {
-          color c = conv(x, y, ConvMask.mask(maskId), ConvMask.size(maskId), original);
+          color c = conv(x, y, ConvMask.mask(maskId), ConvMask.size(maskId), img);
           int loc = x + y*img.width;
           pg.pixels[loc] = c;
         }
       }
       pg.updatePixels();
+      pg.endDraw();
       return pg;
     }
     
@@ -83,16 +79,19 @@ PImage convolute(PImage original, int maskId) {
   
   return color(rtotal, gtotal, btotal);
 }
-    
-PImage luma(PImage img) {
-  img.loadPixels();
+
+PGraphics luma(PImage img) {
+  PGraphics pg = createGraphics(640, 360);
+  pg.beginDraw();
+  pg.loadPixels();
   for (int x = 0; x < img.width; x++) {
     for (int y = 0; y < img.height; y++ ) {
       int loc = x + y*img.width;
       color p = img.pixels[loc];
-      img.pixels[loc] = color(0.212*(red(p)) + 0.701*green(p) + 0.087*blue(p));
+      pg.pixels[loc] = color(0.212*(red(p)) + 0.701*green(p) + 0.087*blue(p));
     }
   }
-  img.updatePixels();
-  return img;
+  pg.updatePixels();
+  pg.endDraw();
+  return pg;
 }
