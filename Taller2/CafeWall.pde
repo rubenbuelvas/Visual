@@ -10,11 +10,6 @@ class CafeWall {
   }
     
   void display(int x, int y) {
-    this.load();
-    image(pg, x, y, sizeX, sizeY);
-  }
-  
-  void load() {
     pg.beginDraw();
     pg.pushStyle();
     pg.background(0);
@@ -27,6 +22,7 @@ class CafeWall {
     }
     pg.popStyle();
     pg.endDraw();
+    image(pg, x, y, sizeX, sizeY);
   }
   
   void drawRow(float y, float h, float offset) {
