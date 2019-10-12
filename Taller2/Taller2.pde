@@ -1,14 +1,15 @@
 int mode = -1;
-int buttonOffset = 120;
+int buttonOffset = 180;
 
 CafeWall cw;
 LilacChaser lc;
 Hering hr;
 
 Button[] buttons;
+Button actionButton;
 
 void setup() {
-  size(1200, 600);
+  size(1000, 600);
   textAlign(CENTER, CENTER);
   
   buttons = new Button[6];
@@ -22,6 +23,8 @@ void setup() {
   cw = new CafeWall(600, 250, 4);
   lc = new LilacChaser(300);
   hr = new Hering(600, 250);
+  
+  actionButton = new Button("Action", Colors.GOLDEN);
 }
 
 void draw() {
@@ -32,25 +35,46 @@ void draw() {
   textSize(16);
   text("José David Nieto, Rubén Camilo Buelvas\nUniversidad Nacional de Colombia", width/2, 100);
   
-  displayIllusion(mode);
+  selectIllusion(mode);
   for(int i = 0; i < buttons.length; i++) {
-    if(buttons[i].update()) {
-      mode = i;
-    }
     buttons[i].display(0, buttonOffset+40*i, 220, 30);
+  }
+  actionButton.display(width/2-50, height-100, 250, 50);
+}
+
+void mouseClicked() {  
+  for(int i = 0; i < buttons.length; i++) {
+    if(buttons[i].update())  mode = i;
+  }
+  
+  if(actionButton.update())
+    selectAction(mode);  
+}
+
+void selectIllusion(int c) {
+  switch (c) {
+    case 0:
+      cw.display(300, 200);
+      break;
+    case 1:
+      lc.display(420, 180);
+      break;
+    case 2:
+      hr.display(300, 200);
+      break;
   }
 }
 
-void displayIllusion(int c) {
-  switch (c) {
+void selectAction(int m) {
+  switch(m) {
     case 0:
-      cw.display(400, 200);
+      cw.action();
       break;
     case 1:
-      lc.display(400, 200);
+      lc.action();
       break;
     case 2:
-      hr.display(400, 200);
+      hr.action();
       break;
   }
 }

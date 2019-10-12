@@ -11,7 +11,7 @@ class Button {
   }
   
   boolean update() {
-    return onPressed();
+    return onHover();
   }
   
   void display(int x1, int y1, int sizeX, int sizeY) {
@@ -28,6 +28,26 @@ class Button {
     fill(onPressed() ? 0 : (onHover() ? 0 : 255));
     text(text, x1+10, y1);
     popStyle();
+  }
+  
+  void display(int x1, int y1, int sizeX, int sizeY, PGraphics pg) {
+    this.x1 = x1;
+    this.sizeX = sizeX;
+    this.y1 = y1;
+    this.sizeY = sizeY;
+    
+    pg.beginDraw();
+    pg.pushStyle();
+    pg.noStroke();
+    pg.textAlign(LEFT, TOP);
+    pg.fill(onPressed() ? 0 : (onHover() ? 255 : c));
+    pg.rect(x1, y1, sizeX, sizeY);
+    pg.fill(onPressed() ? 0 : (onHover() ? 0 : 255));
+    pg.text(text, x1+10, y1);
+    pg.popStyle();
+    pg.endDraw();
+    
+    image(pg, 0, 0);
   }
   
   boolean onHover() {
