@@ -14,7 +14,7 @@ class Cubes {
     pg.image(img, 0, 0, pg.width, pg.height);
     
     if(!this.show) {
-      pg.rect(90, 135, 110, 30);
+      pg.rect(90, 135, 110, 40);
     }
     
     pg.endDraw();
