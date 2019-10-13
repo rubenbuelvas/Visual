@@ -1,9 +1,6 @@
 class SteppingFeet {
   PGraphics pg;
-  int innerx, innery;
   boolean show;
-  int Y_AXIS = 1;
-  int X_AXIS = 2;
   color c1, c2;
   int c;
   

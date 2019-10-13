@@ -6,6 +6,7 @@ LilacChaser lc;
 Hering hr;
 GrayGradient gg;
 SteppingFeet sf;
+Cubes cu;
 
 Button[] buttons;
 Button actionButton;
@@ -20,13 +21,14 @@ void setup() {
   buttons[2] = new Button("Hering Illusion", Colors.PURPLE);
   buttons[3] = new Button("Gray gradient", Colors.PURPLE);
   buttons[4] = new Button("Stepping feet", Colors.PURPLE);
-  buttons[5] = new Button("Illusion 6", Colors.PURPLE);
+  buttons[5] = new Button("Cubes", Colors.PURPLE);
   
   cw = new CafeWall(600, 250, 4);
   lc = new LilacChaser(300);
   hr = new Hering(600, 250);
   gg = new GrayGradient(600, 250);
   sf = new SteppingFeet(600, 250);
+  cu = new Cubes(300, 250);
   
   actionButton = new Button("Action", Colors.GOLDEN);
 }
@@ -72,6 +74,9 @@ void selectIllusion(int c) {
     case 4:
       sf.display(300, 200);
       break;
+    case 5:
+      cu.display(420, 200);
+      break;
   }
 }
 
@@ -91,6 +96,9 @@ void selectAction(int m) {
       break;
     case 4:
       sf.action();
+      break;
+    case 5:
+      cu.action();
       break;
   }
 }
