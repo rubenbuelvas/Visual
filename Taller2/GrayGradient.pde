@@ -21,7 +21,6 @@ class GrayGradient {
       setGradient(0, 0, pg.width, pg.height, c1, c2, X_AXIS);
     }
     
-    // draw horizontal lines
     pg.fill(128);
     pg.stroke(128);
     pg.rect(100, 100, 400, 50);
