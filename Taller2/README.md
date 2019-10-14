@@ -23,4 +23,4 @@
 
 2. Describa brevememente las referencias estudiadas y los posibles temas en los que le gustaría profundizar
 
-A VITOLA LE GUSTA CATALINA AAAAAAAAAAAAAA
+En las referencias, de forma general, se explica cómo funciona la ilusión y por qué se produce. El patrón en común en todas ellas es que la explicación es más psicológica que física. El cerebro está "diseñado" para distinguir patrones y extraer información de lo que perciben sus sentidos. Por lo tanto, la imagen final de lo que vemos no es la realidad, sino lo que nuestro cerebro quiere que veámos. Esto se explica muy bien en la charla de TED "Do we see reality as it is?" y es un tema que consideramos muy interesante para estudiar.
