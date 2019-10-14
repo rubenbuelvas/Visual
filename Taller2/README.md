@@ -14,9 +14,9 @@
 
 | Ilusión | Categoria | Referencia | Tipo de interactividad (si aplica) | URL código base (si aplica) |
 |---------|-----------|------------|------------------------------------|-----------------------------|
-|Cafe Wall|           |            |                                    |                             |
-|Lilac Chaser|           |            |                                    |                             |
-|Hering Illusion|           |            |                                    |                             |
+|Cafe Wall|Geometric|            |                                    |                             |
+|Lilac Chaser|Other|            |                                    |                             |
+|Hering Illusion|Geometric|            |                                    |                             |
 |Gray gradient|Color gradient|https://faculty.washington.edu/chudler/samediff.html|El fondo desaparece revelando el verdadero color del rectángulo|                             |
 |Stepping feet|Movement|https://www.cogsci.nl/blog/stepping-feet-and-tipsy-toddlers|Las rayas verticales se reemplazan por un color gris uniforme, que permite ver cómo se desplazan los rectángulos realmente|                             |
 |Gray cubes|Shadow color|https://slate.com/technology/2013/12/optical-illusion-shades-of-gray.html|La ilusión es producida por los destellos en los bordes de los cubos, el programa permite dibujar un rectángulo sobre dichos bordes|                             |
