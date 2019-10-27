@@ -10,7 +10,7 @@ Vector v1, v2, v3;
 TimingTask spinningTask;
 boolean yDirection;
 // scaling is a power of 2
-int n = 4;
+int n = 8;
 
 // 2. Hints
 boolean triangleHint = true;
@@ -98,16 +98,35 @@ void triangleRaster() {
       float r13 = signedEdge(i, j, v3, v1);
       float r23 = signedEdge(i, j, v2, v3);
       
-      if((clockwise && r12 >= 0 && r13 >= 0 && r23 >= 0)
-        || (!clockwise && r12 <= 0 & r13 <= 0 && r23 <= 0)) {
-        fill(getColor(i, j));
+      if((clockwise && r12 >= 0 && r13 >= 0 && r23 >= 0) || (!clockwise && r12 <= 0 & r13 <= 0 && r23 <= 0)) {
+        
+        int neighbors = 0;  
+        
+        int a = i-1;
+        int b = j-1;
+        
+        for(int k=0; k<3; k++){
+          for(int l=0; l<3; l++){
+             r12 = signedEdge(a+k, b+l, v1, v2);
+             r13 = signedEdge(a+k, b+l, v3, v1);
+             r23 = signedEdge(a+k, b+l, v2, v3);
+        
+             if(!((clockwise && r12 >= 0 && r13 >= 0 && r23 >= 0) || (!clockwise && r12 <= 0 & r13 <= 0 && r23 <= 0))) {
+               neighbors++;
+             }
+          }  
+        }
+        
+       
+        
+        fill(getColor(i, j, neighbors));
         square(i, j, 1);
       }
   }
   pop();
 }
 
-color getColor(int i, int j) {
+color getColor(int i, int j, int n) {
   Vector node1 = node.location(v1);
   Vector node2 = node.location(v2);
   Vector node3 = node.location(v3);
@@ -122,7 +141,8 @@ color getColor(int i, int j) {
   
   return color((255 - r * 255 / min(d12, d13)),
                 (255 - g * 255 / min(d12, d23)),
-                (255 - b * 255 / min(d13, d23)));
+                (255 - b * 255 / min(d13, d23)),
+                (255/((n/3)+1)));
 }
 
 float signedEdge(float x, float y, Vector v0, Vector v1) {
