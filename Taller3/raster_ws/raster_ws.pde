@@ -10,7 +10,7 @@ Vector v1, v2, v3;
 TimingTask spinningTask;
 boolean yDirection;
 // scaling is a power of 2
-int n = 8;
+int n = 4;
 
 // 2. Hints
 boolean triangleHint = true;
@@ -142,7 +142,7 @@ color getColor(int i, int j, int n) {
   return color((255 - r * 255 / min(d12, d13)),
                 (255 - g * 255 / min(d12, d23)),
                 (255 - b * 255 / min(d13, d23)),
-                (255/((n/3)+1)));
+                (255/((n/2)+1)));
 }
 
 float signedEdge(float x, float y, Vector v0, Vector v1) {
