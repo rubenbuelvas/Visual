@@ -18,7 +18,10 @@ Para el algoritmo del anti-aliasing se utilizó el dado en la fuente del scratch
 
 ## Fuentes
 https://www.gamingscan.com/what-is-anti-aliasing/
+
 https://lunaloca.com/tutorials/antialiasing/
+
 https://www.scratchapixel.com/lessons/3d-basic-rendering/rasterization-practical-implementation/rasterization-practical-implementation
+
 https://www.youtube.com/watch?time_continue=1&v=hqi0114mwtY
 
