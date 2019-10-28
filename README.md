@@ -3,5 +3,3 @@
 |-------------|-------------|
 |Rubén Buelvas|rubenbuelvas |
 |José Nieto   |jdnietov     |
-
-## Discusión
