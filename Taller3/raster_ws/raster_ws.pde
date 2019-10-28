@@ -117,8 +117,6 @@ void triangleRaster() {
           }  
         }
         
-       
-        
         fill(getColor(i, j, neighbors));
         square(i, j, 1);
       }
